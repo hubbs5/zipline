@@ -38,6 +38,7 @@ from .utils.events import (
     date_rules,
     time_rules
 )
+from .keys import *
 
 __all__ = [
     'EODCancel',
