@@ -14,9 +14,8 @@
 # limitations under the License.
 import pandas as pd
 import requests
-import json
 
-def get_benchmark_returns(symbol):
+def get_benchmark_returns(symbol, IEX_TOKEN):
     """
     Get a Series of benchmark returns from IEX associated with `symbol`.
     Default is `SPY`.
@@ -34,7 +33,6 @@ def get_benchmark_returns(symbol):
             symbol, IEX_TOKEN)
     )
     data = r.json()
-    # data = json.loads(r.text)
 
     df = pd.DataFrame(data)
 

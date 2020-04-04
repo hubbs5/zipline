@@ -15,6 +15,7 @@
 
 import logbook
 import pandas as pd
+import datetime
 
 from zipline.utils.memoize import remember_last
 from zipline.utils.pandas_utils import normalize_date
@@ -35,8 +36,12 @@ class SimulationParameters(object):
                  data_frequency='daily',
                  arena='backtest'):
 
-        assert type(start_session) == pd.Timestamp
-        assert type(end_session) == pd.Timestamp
+        if type(start_session) == datetime.datetime:
+            start_session = pd.Timestamp(start_session)
+        if type(end_session) == datetime.datetime:
+            end_session = pd.Timestamp(end_session)
+        assert type(start_session) == pd.Timestamp, 'Time format required'
+        assert type(end_session) == pd.Timestamp, 'Time format required'
 
         assert trading_calendar is not None, \
             "Must pass in trading calendar!"

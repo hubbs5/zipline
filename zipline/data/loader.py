@@ -20,6 +20,7 @@ from six.moves.urllib_error import HTTPError
 from trading_calendars import get_calendar
 
 from .benchmarks import get_benchmark_returns
+from ..keys import IEX_TOKEN
 from ..utils.paths import (
     cache_root,
     data_root,
@@ -179,7 +180,7 @@ def ensure_benchmark_data(symbol, first_date, last_date, now, trading_day,
     )
 
     try:
-        data = get_benchmark_returns(symbol)
+        data = get_benchmark_returns(symbol, IEX_TOKEN)
         data.to_csv(get_data_filepath(filename, environ))
     except (OSError, IOError, HTTPError):
         logger.exception('Failed to cache the new benchmark returns')
